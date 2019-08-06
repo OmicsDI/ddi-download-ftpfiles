@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.ConfigFileApplicationContextInitial
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import uk.ac.ebi.ddi.task.ddidownloadftpfiles.configuration.DownloadFtpFileTaskProperties;
 import uk.ac.ebi.ddi.task.ddidownloadftpfiles.service.DownloadFilesService;
 
 import java.nio.file.Files;
@@ -30,9 +31,13 @@ public class ITDownloadFileService {
     @Autowired
     private DownloadFilesService downloadFilesService;
 
+    @Autowired
+    private DownloadFtpFileTaskProperties dldProps;
+
     @Test
     public void contextLoads() throws Exception {
-        downloadFilesService.download();
+        downloadFilesService.download(dldProps.getUser(), dldProps.getPort(), dldProps.getTargetDirectory(),
+                dldProps.getServer(), dldProps.getPassword(), dldProps.getSourceDirectory(), dldProps.getPattern());
         Path path = Paths.get("/tmp/prod/biomodels");
         Assert.assertTrue(Files.exists(path));
     }
