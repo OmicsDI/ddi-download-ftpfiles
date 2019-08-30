@@ -8,5 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableTask
 @EnableConfigurationProperties({ DownloadFtpFileTaskProperties.class })
+@ComponentScan({"uk.ac.ebi.ddi.ddifileservice"})
 public class TaskConfiguration {
 }
