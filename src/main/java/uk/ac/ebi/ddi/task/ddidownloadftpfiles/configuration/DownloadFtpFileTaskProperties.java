@@ -1,21 +1,18 @@
 package uk.ac.ebi.ddi.task.ddidownloadftpfiles.configuration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.core.io.Resource;
 
-@ConfigurationProperties("downloadftpfiles")
+@ConfigurationProperties("ftp")
 public class DownloadFtpFileTaskProperties {
 
     // File to be download
-    private String sourceDirectory;
+    private String sourceDir;
 
-    //Folder to copy the results file
-    private Resource targetDirectory;
+    // Folder to copy the results file
+    private String targetDir;
 
     // User of the ftp
-    private String user;
+    private String user = "anonymous";
 
     // Server of the ftp
     private String server;
@@ -23,26 +20,29 @@ public class DownloadFtpFileTaskProperties {
     // Port of the FTP the default port fort most fo the services is 21
     private int port = 21;
 
-    //Pattern of files to be download
+    // Pattern of files to be download
     private String pattern;
 
-    //Passowrd for the FTP
-    private String password;
+    // Dirs to be ignored
+    private String[] ignoreDirs = new String[0];
 
-    public String getSourceDirectory() {
-        return sourceDirectory;
+    // Password for the FTP
+    private String password = "anonymous";
+
+    public String getSourceDir() {
+        return sourceDir;
     }
 
-    public void setSourceDirectory(String sourceDirectory) {
-        this.sourceDirectory = sourceDirectory;
+    public void setSourceDir(String sourceDir) {
+        this.sourceDir = sourceDir;
     }
 
-    public Resource getTargetDirectory() {
-        return targetDirectory;
+    public String getTargetDir() {
+        return targetDir;
     }
 
-    public void setTargetDirectory(Resource targetDirectory) {
-        this.targetDirectory = targetDirectory;
+    public void setTargetDir(String targetDir) {
+        this.targetDir = targetDir;
     }
 
     public String getUser() {
@@ -85,5 +85,11 @@ public class DownloadFtpFileTaskProperties {
         this.port = port;
     }
 
+    public String[] getIgnoreDirs() {
+        return ignoreDirs;
+    }
 
+    public void setIgnoreDirs(String[] ignoreDirs) {
+        this.ignoreDirs = ignoreDirs;
+    }
 }
